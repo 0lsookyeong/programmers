@@ -1,1 +1,35 @@
 
+def solution(genres, plays):
+    answer = []
+    d={}
+    play={}
+    for i in range(len(genres)):
+      play[genres[i]]= play.get(genres[i],0)+plays[i]
+      d[genres[i]]=d.get(genres[i],[])+[(plays[i],i)]
+
+        # print(d.keys())
+        # if genres[i] not in d:
+        #     l=list()
+        #     tmp=[]
+        #     tmp.append(plays[i])
+        #     tmp.append(i)
+        #     l.append(tmp)
+        #     d[genres[i]] = l
+        # else :
+        #   tmp=[]
+        #   tmp.append(plays[i])
+        #   tmp.append(i)
+        #   l=d[genres[i]]
+        #   l.append(tmp)
+        #   d[genres[i]]=l
+
+    play=sorted(play.items(),key= lambda x:x[1],reverse=True)
+    print(play)
+   
+
+    for (key,num) in play:
+      d[key]= sorted(d[key],key=lambda x:(-x[0],x[1]))
+      answer+= [i for (_,i) in d[key][:2]]
+    return answer
+
+
